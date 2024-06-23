@@ -1,0 +1,70 @@
+@page "/sign-up"
+@using BlogWeb.Model.Request;
+@inject AuthenticationService authenticationService;
+
+<PageTitle> Sign Up</PageTitle>
+
+<h1 class="pb-50"> Join Us Today</h1>
+<p>&nbsp;</p>
+
+<div class="row">
+    <div class="col-sm-4">
+        <EditForm EditContext="editContext" OnValidSubmit="Submit" Model="@RegisterModel">
+            <DataAnnotationsValidator />
+             <ValidationSummary />
+            <div class="mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <InputText id="username" @bind-Value="RegisterModel.UserName" class="form-control"></InputText>
+            </div>
+       
+            <div class="mb-3">
+                <label for="firstname" class="form-label">First name:</label>
+                <InputText id="firstname" @bind-Value="RegisterModel.FirstName" class="form-control"></InputText>
+            </div>
+            <div class="mb-3">
+                <label for="lastname" class="form-label">Last name:</label>
+                <InputText id="lastname" @bind-Value="RegisterModel.LastName" class="form-control"></InputText>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <InputText id="email" @bind-Value="RegisterModel.Email" class="form-control"></InputText>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <InputText type="password" id="password" @bind-Value="RegisterModel.Password" class="form-control">
+                </InputText>
+            </div>
+            <div class="mb-3">
+                <label for="confirm-password" class="form-label">Confirm Password:</label>
+                <InputText type="confirm-password" id="confirm-password" @bind-Value="RegisterModel.ConfirmPassword"
+                    class="form-control">
+                </InputText>
+            </div>
+          @if(authenticationService.loading){
+                <p><em>Loadin.....</em></p>
+          }else{
+                <button type="submit" class="btn btn-primary button">Sign Up</button>
+          }  
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private EditContext? editContext;
+    RegisterModel RegisterModel = new()
+    {
+        ConfirmPassword = string.Empty,
+        Email = string.Empty,
+        FirstName =  string.Empty,
+        LastName = string.Empty,
+        Password =string.Empty,
+        UserName =string.Empty,
+    };
+
+    
+
+    public async Task Submit()
+    {
+        await authenticationService.SignUp(RegisterModel);
+    }
+}

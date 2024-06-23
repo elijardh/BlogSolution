@@ -1,0 +1,78 @@
+﻿@page "/"
+@using System.Diagnostics
+@inject HomeServices HomeServices;
+@inject NavigationManager NavigationManager;
+@inject UserService UserService;
+
+<style>
+    .flex-container {
+        display: grid;
+        align-self: center;
+        align-items: center;
+        grid-template-columns: 1fr 1fr;
+        /* Create two equal-width columns */
+        gap: 10px;
+    }
+
+    .flex-item {
+        background-color: lightgray;
+        padding: 20px;
+        border: 1px solid #ccc;
+    }
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 10px;
+
+    }
+
+    .button {
+        width: 150px;
+        align-content: center;
+        background: linear-gradient(135deg, blue 0%, purple 100%);
+    }
+</style>
+
+<PageTitle>Home</PageTitle>
+
+<div class="header">
+    <h1>Hello, @(UserService.userModel?.firstName ?? "guest")!!</h1>
+    @if (UserService.userModel != null)
+    {
+        <button type="button" class="btn btn-primary button" @onclick="AddArticle">Add Article</button>
+    }
+</div>
+@* <ShimmerLoader></ShimmerLoader>
+<ArticleCard></ArticleCard> *@
+
+
+
+@if (HomeServices.loading)
+{
+    <ShimmerLoader></ShimmerLoader>
+}
+else
+{
+    <div class="flex-container">
+    @foreach (var artilce in HomeServices.articles)
+        {
+            <ArticleCard></ArticleCard>
+        }
+    </div>
+}
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await HomeServices.GetArticles();
+    }
+
+    private void AddArticle()
+    {
+        NavigationManager.NavigateTo("/add-article");
+    }
+}
+
+using System.Diagnostics;

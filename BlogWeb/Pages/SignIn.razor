@@ -1,0 +1,47 @@
+@page "/sign-in"
+@using BlogWeb.Model.Request
+@inject AuthenticationService authenticationService;
+@inject NavigationManager navigationManager;
+
+<PageTitle>Sign In</PageTitle>
+
+<h1>Welcome Back</h1>
+
+<div class="row">
+    <div class="col-sm-4">
+        <EditForm OnValidSubmit="Submit" Model="@loginModel">
+            <DataAnnotationsValidator />
+             <ValidationSummary />
+            <div class="mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <InputText id="username" @bind-Value="loginModel.UserName" class="form-control"></InputText>
+            </div>
+       
+          
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <InputText type="password" id="password" @bind-Value="loginModel.Password" class="form-control">
+                </InputText>
+            </div>
+           
+          @if(authenticationService.loading){
+                <p><em>Loadin.....</em></p>
+          }else{
+                <button type="submit" class="btn btn-primary button">Sign In</button>
+          }  
+        </EditForm>
+        <button type="button" @onclick="Register">Sign Up</button>
+    </div>
+</div>
+
+@code {
+    LoginModel loginModel = new() { };
+        public async Task Submit()
+    {
+        await authenticationService.SignIn(loginModel);
+    }
+
+    public void Register(){
+        navigationManager.NavigateTo("/sign-up");
+    }
+}

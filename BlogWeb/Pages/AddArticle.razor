@@ -1,0 +1,39 @@
+@page "/add-article"
+@using BlogWeb.Model.Response;
+
+<style>
+    textarea {
+        resize: none;
+        height: 200px;
+    }
+</style>
+
+<PageTitle> Add Article</PageTitle>
+
+<h1 class="pb-50"> Add a new article now</h1>
+<p>&nbsp;</p>
+
+<div class="row">
+    <div class="col-sm-4">
+        <EditForm Model="@ArticleModel">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title:</label>
+                <InputText id="title" @bind-Value="ArticleModel.title" class="form-control"></InputText>
+            </div>
+            &nbsp;
+            <div class="mb-3">
+                <label for="body" class="form-label">Body:</label>
+                <textarea id="body" @bind="ArticleModel.body" class="form-control"></textarea>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    ArticleModel ArticleModel = new()
+        {
+            authorId = string.Empty,
+            body = string.Empty,
+            title = string.Empty,
+        };
+}

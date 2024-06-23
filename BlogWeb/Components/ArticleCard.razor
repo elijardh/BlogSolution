@@ -1,0 +1,154 @@
+@page "/card-component"
+
+<div class="card">
+    <img src="images/Knight.jpg" alt="Card image" class="card-image">
+    <div class="card-content">
+        <div class="card-title">Card Title</div>
+        <div class="card-description">Card description goes here.</div>
+    </div>
+</div>
+
+<style>
+    .card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 16px;
+        max-width: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-right: 16px;
+    }
+
+    .card-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .card-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .card-description {
+        font-size: 1em;
+        color: #555;
+    }
+</style>
+
+
+@* @using Microsoft.Fast.Components.FluentUI
+@code {
+[Parameter]
+public required string CssClass { get; set; }
+
+[Parameter]
+public RenderFragment? ChildContent { get; set; }
+}
+<style>
+.container {
+height: 40vw;
+width: 40vw;
+margin-top: 10px;
+margin-bottom: 10px;
+margin-left: 10px;
+display: flex;
+align-items: end;
+justify-content: center;
+float: left
+}
+
+.column {
+gap: 10;
+display: flex;
+flex-direction: column;
+margin-bottom: 10px;
+}
+
+.image {
+border-radius: 10px;
+height: 100px;
+width: 100px;
+}
+
+.title {
+font-size: 14px;
+font-weight: 700;
+text-align: start;
+color: white;
+
+}
+
+.subtitle {
+font-size: 10px;
+font-weight: 400;
+color: white;
+text-align: start;
+}
+
+.item {
+background-color: #4CAF50;
+color: white;
+padding: 20px;
+text-align: center;
+border-radius: 5px;
+}
+
+.row {
+display: flexbox;
+justify-content: center;
+align-items: center;
+margin: 0, auto;
+flex-direction: row;
+gap: 10px;
+background-color: purple;
+}
+
+.vertical {
+display: flex;
+flex-direction: column;
+}
+</style>
+
+<div>
+<div class="row">
+<p class="item">dgfdf</p><strong class="item">dvzdvf</strong>
+</div>
+
+<FluentCard Height="150px" Width="300px" class="row">
+
+<img class="image" src="images/Knight.jpg">
+<div class="vertical">
+<div class="title">
+Kubera One Last God
+</div>
+<br>
+<div class="subtitle">
+It truly is the best
+</div>
+</div>
+
+</FluentCard>
+</div> *@
+@* <div class="container CssClass">
+<img class="image" src="images/Knight.jpg">
+<div class="column">
+<div class="title">
+Kubera One Last God
+</div>
+<br>
+<div class="subtitle">
+It truly is the best
+</div>
+</div>
+
+</div> *@
